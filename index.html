@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oisin Moore - Technical Sales Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0099cc;
+            --accent-color: #64ffda;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --text-muted: #78909c;
+            --background: #0a0a0a;
+            --surface: #141414;
+            --surface-elevated: #1e1e1e;
+            --border: #2a2a2a;
+            --gradient: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #64ffda 100%);
+            --glow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: slideInLeft 1.2s ease-out 0.3s forwards;
+        }
+
+        .hero-content .role {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: slideInLeft 1.2s ease-out 0.6s forwards;
+        }
+
+        .hero-content .description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideInLeft 1.2s ease-out 0.9s forwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            opacity: 0;
+            animation: slideInLeft 1.2s ease-out 1.2s forwards;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Profile Image Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: slideInRight 1.2s ease-out 0.6s forwards;
+        }
+
+        .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 20px;
+            background: var(--surface-elevated);
+            border: 2px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .profile-image:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--glow);
+            border-color: var(--primary-color);
+        }
+
+        .profile-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--surface) 0%, var(--surface-elevated) 100%);
+        }
+
+        .profile-info {
+            text-align: center;
+        }
+
+        .profile-location {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-status {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 50px;
+            padding: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .nav-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 200;
+            margin-bottom: 4rem;
+            color: var(--text-primary);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: var(--gradient);
+            margin: 1rem 0;
+        }
+
+        /* Experience */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 30px);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 30px);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px var(--background), var(--glow);
+        }
+
+        .timeline-content {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-content:hover {
+            background: var(--surface-elevated);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .job-period {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .company-name {
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .job-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Skills */
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--surface);
+            padding: 2.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .skill-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 15px 15px 0 0;
+        }
+
+        .skill-category:hover {
+            background: var(--surface-elevated);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 212, 255, 0.05);
+            border-color: rgba(0, 212, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .skill-source {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+
+        /* About */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 2;
+            color: var(--text-secondary);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .about-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            background: var(--surface);
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            cursor: pointer;
+        }
+
+        .contact-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-item:hover {
+            background: var(--surface-elevated);
+            transform: translateY(-15px) scale(1.05);
+            border-color: var(--primary-color);
+            box-shadow: var(--glow);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--glow);
+        }
+
+        .contact-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            nav {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 2rem auto;
+                width: fit-content;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Ambient background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            top: 60%;
+            right: 20%;
+            animation-delay: -7s;
+        }
+
+        .orb-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(0, 153, 204, 0.1) 0%, transparent 70%);
+            bottom: 20%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-bg">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+        <div class="ambient-orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Oisin Moore</h1>
+                    <div class="role">Technical Sales Engineer</div>
+                    <p class="description">
+                        Mechanical Engineer specializing in technical sales, bridging complex engineering 
+                        solutions with customer needs. Expert in CAD design, thermodynamics, and process 
+                        optimization with a proven track record in driving revenue growth.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-number">2+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">95</div>
+                            <div class="stat-label">Connections</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">DCU</div>
+                            <div class="stat-label">Graduate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="profile-image">
+                        <div class="profile-placeholder">
+                            Your Professional<br>Photo Here
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-location">📍 Dublin, Ireland</div>
+                        <div class="profile-status">Open to Work</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                I'm a Mechanical Engineer with a passion for technical sales, combining hands-on experience 
+                in CAD design, thermodynamics, and materials science with a knack for solving problems and 
+                optimizing processes. I excel at turning technical knowledge into real-world solutions for 
+                customers, building strong relationships, and helping businesses grow through strategic sales 
+                and account management.
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="job-period">Sep 2024 - Present</div>
+                        <div class="job-title">Inside Sales Engineer</div>
+                        <div class="company-name">Modern Plant</div>
+                        <div class="job-description">
+                            Built and maintained qualified sales pipelines through strategic inbound and outbound 
+                            activities. Delivered technical sales support ensuring high customer engagement while 
+                            proactively driving revenue through upselling and cross-selling. Maintained accurate CRM 
+                            records and strengthened long-term customer relationships to exceed sales targets.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="job-period">Mar 2022 - Sep 2022</div>
+                        <div class="job-title">Mechanical Design Engineer Intern</div>
+                        <div class="company-name">Hanley Energy</div>
+                        <div class="job-description">
+                            Contributed to production process improvements and technical innovation with focus on 
+                            efficiency and reliability. Enhanced gasket production through component redesign, 
+                            programmed RFID access systems for EV charging points, and utilized SolidWorks for 
+                            3D modelling to support new production line development.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-container">
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-title">Engineering Software</div>
+                        <div class="skill-item">
+                            <span class="skill-name">SOLIDWORKS</span>
+                            <span class="skill-source">Hanley Energy & DCU</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Ansys Products</span>
+                            <span class="skill-source">Dublin City University</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Engineering Mathematics</span>
+                            <span class="skill-source">Dublin City University</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-title">Sales & CRM</div>
+                        <div class="skill-item">
+                            <span class="skill-name">Sales Pipeline Management</span>
+                            <span class="skill-source">Modern Plant</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Customer Relationship Management</span>
+                            <span class="skill-source">Modern Plant</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-title">Data & Analytics</div>
+                        <div class="skill-item">
+                            <span class="skill-name">RStudio</span>
+                            <span class="skill-source">Dublin City University</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Data Analysis</span>
+                            <span class="skill-source">Multiple Companies</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Microsoft Excel</span>
+                            <span class="skill-source">Dublin City University</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Connect</h2>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>Professional inquiries</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <h3>LinkedIn</h3>
+                    <p>Let's connect professionally</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3>Available</h3>
+                    <p>Open to opportunities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for smooth animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.section-title, .timeline-item, .skill-category, .about-content, .contact-item').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Staggered animations for skills
+        document.querySelectorAll('.skill-category').forEach((category, index) => {
+            category.style.transitionDelay = `${index * 0.2}s`;
+        });
+
+        // Contact items stagger
+        document.querySelectorAll('.contact-item').forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Timeline items stagger
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.3}s`;
+        });
+    </script>
+</body>
+</html>
